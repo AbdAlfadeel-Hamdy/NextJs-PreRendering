@@ -3,7 +3,7 @@ import path from "path";
 
 import { Fragment } from "react";
 
-const ProductDetail = (props) => {
+const ProductDetailPage = (props) => {
   const { product } = props;
   return (
     <Fragment>
@@ -22,9 +22,20 @@ export async function getStaticProps(context) {
   const product = data.products.find((product) => product.id === productId);
   return {
     props: {
-      pdoduct: product,
+      product: product,
     },
   };
 }
 
-export default ProductDetail;
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { id: "p1" } },
+      { params: { id: "p2" } },
+      { params: { id: "p3" } },
+    ],
+    fallback: false,
+  };
+}
+
+export default ProductDetailPage;
